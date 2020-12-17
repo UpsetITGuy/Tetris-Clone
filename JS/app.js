@@ -57,10 +57,11 @@ const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromi
 let currentPosition = 4
 let currentRotation = 0
 
+    console.log(theTetrominoes[0][0])
+
 //randomly select a Tetromino and it's first rotation
 let random = Math.floor(Math.random()*theTetrominoes.length)
-
-let current = theTetrominoes[random][0]
+let current = theTetrominoes[random][currentRotation]
 
 // draw the Tetromino
 function draw() {
@@ -148,16 +149,44 @@ function moveRight() {
 }
 
 
-//rotate the tetromino
-function rotate() {
+  ///FIX ROTATION OF TETROMINOS A THE EDGE 
+  function isAtRight() {
+    return current.some(index=> (currentPosition + index + 1) % width === 0)  
+  }
+  
+  function isAtLeft() {
+    return current.some(index=> (currentPosition + index) % width === 0)
+  }
+  
+  function checkRotatedPosition(P){
+    P = P || currentPosition       //get current position.  Then, check if the piece is near the left side.
+    if ((P+1) % width < 4) {         //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
+      if (isAtRight()){            //use actual position to check if it's flipped over to right side
+        currentPosition += 1    //if so, add one to wrap it back around
+        checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
+        }
+    }
+    else if (P % width > 5) {
+      if (isAtLeft()){
+        currentPosition -= 1
+      checkRotatedPosition(P)
+      }
+    }
+  }
+
+
+  //rotate the tetromino
+  function rotate() {
     undraw()
     currentRotation ++
     if(currentRotation === current.length) { //if the current rotation gets to 4, make it go back to 0
-        currentRotation = 0
+      currentRotation = 0
     }
     current = theTetrominoes[random][currentRotation]
+    checkRotatedPosition()
     draw()
-}
+  }
+  /////////
 
 //show up-next tetromino in mini-grid display
 const displaySquares = document.querySelectorAll('.mini-grid div')
@@ -174,6 +203,7 @@ const upNextTetrominoes = [
     [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
 ]
 
+
   //display the shape in the mini-grid display
   function displayShape() {
     //remove any trace of a tetromino form the entire grid
@@ -182,10 +212,10 @@ const upNextTetrominoes = [
       square.style.backgroundColor = ''
     })
     upNextTetrominoes[nextRandom].forEach( index => {
-        displaySquares[displayIndex + index].classList.add('tetromino')
-        displaySquares[displayIndex].style.backgroundColor = colors[nextRandom]
+      displaySquares[displayIndex + index].classList.add('tetromino')
+      displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom]
     })
-}
+  }
 
 //add functionality to the button
 startBtn.addEventListener('click', () => {
