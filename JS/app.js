@@ -16,19 +16,33 @@ const colors = [
 ]
 
 //The Tetrominoes
-const lTetromino = [
+const rTetromino = [
     [1, width+1, width*2+1, 2],
     [width, width+1, width+2, width*2+2],
     [1, width+1, width*2+1, width*2],
     [width, width*2, width*2+1, width*2+2]
 ]
 
-const zTetromino = [
+const lTetromino = [
+    [0, 1, width+1, width*2+1],
+    [width, width+1, width+2, width*2],
+    [0, width, width*2, width*2+1],
+    [width+2, width*2, width*2+1, width*2+2]
+]
+
+const sTetromino = [
     [0,width,width+1,width*2+1],
     [width+1, width+2,width*2,width*2+1],
     [0,width,width+1,width*2+1],
     [width+1, width+2,width*2,width*2+1]
   ]
+
+const zTetromino = [
+    [1,width,width+1,width*2],
+    [width, width+1, width*2+1,width*2+2],
+    [1,width,width+1,width*2],
+    [width, width+1, width*2+1, width*2+2]
+]
 
 const tTetromino = [
     [1, width, width+1, width+2],
@@ -51,7 +65,7 @@ const iTetromino = [
     [width, width+1, width+2, width+3]
 ]
 
-const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
+const theTetrominoes = [rTetromino, lTetromino, zTetromino, sTetromino, tTetromino, oTetromino, iTetromino]
 
 let currentPosition = 4
 let currentRotation = 0
@@ -188,8 +202,10 @@ const displayIndex = 0
 
 // the Tetrominoes without roations
 const upNextTetrominoes = [
-    [1, displayWidth+1, displayWidth*2+1, 2],  //lTetromino
-    [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino
+    [1, 2, displayWidth+1, displayWidth*2+1],  //rTetromino
+    [0, displayWidth, displayWidth*2, displayWidth*2+1], //lTetromino
+    [displayWidth+1, displayWidth+2, displayWidth*2, displayWidth*2+1], //sTetromino
+    [displayWidth, displayWidth+1, displayWidth*2+1, displayWidth*2+2], //zTetromino
     [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
     [0, 1, displayWidth, displayWidth+1], //oTetromino
     [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
