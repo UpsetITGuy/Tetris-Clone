@@ -49,7 +49,6 @@ const iTetromino = [
     [width, width+1, width+2, width+3],
     [1, width+1, width*2+1, width*3+1],
     [width, width+1, width+2, width+3]
-
 ]
 
 const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
@@ -57,7 +56,7 @@ const theTetrominoes = [lTetromino, zTetromino, tTetromino, oTetromino, iTetromi
 let currentPosition = 4
 let currentRotation = 0
 
-    console.log(theTetrominoes[0][0])
+console.log(theTetrominoes[0][0])
 
 //randomly select a Tetromino and it's first rotation
 let random = Math.floor(Math.random()*theTetrominoes.length)
@@ -76,9 +75,9 @@ function undraw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.remove('tetromino')
         squares[currentPosition + index].style.backgroundColor = ''
+
     })
 }
-
 
 //assign functions to keyCodes
 function control(e) {
@@ -118,33 +117,25 @@ function freeze() {
     }
 }
 
-
 //move the tetromino left, unless is at the edge or there is a blockage
 function moveLeft() {
     undraw()
     const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
-
     if(!isAtLeftEdge) currentPosition -=1
-
     if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         currentPosition +=1
     }
-
     draw()
 }
-
 
 //move the tetromino right, unless is at the edge or there is a blockage
 function moveRight() {
     undraw()
     const isAtRightEdge = current.some(index => (currentPosition + index) % width === width -1)
-
     if(!isAtRightEdge) currentPosition +=1
-
     if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         currentPosition -=1
     }
-
     draw()
 }
 
@@ -174,7 +165,6 @@ function moveRight() {
     }
   }
 
-
   //rotate the tetromino
   function rotate() {
     undraw()
@@ -187,6 +177,8 @@ function moveRight() {
     draw()
   }
   /////////
+
+
 
 //show up-next tetromino in mini-grid display
 const displaySquares = document.querySelectorAll('.mini-grid div')
@@ -202,7 +194,6 @@ const upNextTetrominoes = [
     [0, 1, displayWidth, displayWidth+1], //oTetromino
     [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
 ]
-
 
   //display the shape in the mini-grid display
   function displayShape() {
@@ -257,8 +248,5 @@ function gameOver() {
         clearInterval(timerId)
     }
 }
-
-
-
 
 })
