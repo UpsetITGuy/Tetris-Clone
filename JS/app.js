@@ -15,57 +15,57 @@ const colors = [
     'blue'
 ]
 
-//The Tetrominoes
-const rTetromino = [
+//The Tetrominoes  Original names according to NES verison of Tetris handbook
+const blueRicky = [  //Backwards L shape
     [1, width+1, width*2+1, 2],
     [width, width+1, width+2, width*2+2],
     [1, width+1, width*2+1, width*2],
     [width, width*2, width*2+1, width*2+2]
 ]
 
-const lTetromino = [
+const orangeRicky = [  //L shape
     [0, 1, width+1, width*2+1],
     [width, width+1, width+2, width*2],
     [0, width, width*2, width*2+1],
     [width+2, width*2, width*2+1, width*2+2]
 ]
 
-const sTetromino = [
+const rhodeIslandZ = [  //S shape
     [0,width,width+1,width*2+1],
     [width+1, width+2,width*2,width*2+1],
     [0,width,width+1,width*2+1],
     [width+1, width+2,width*2,width*2+1]
   ]
 
-const zTetromino = [
+const clevelandZ = [  //Z shape
     [1,width,width+1,width*2],
     [width, width+1, width*2+1,width*2+2],
     [1,width,width+1,width*2],
     [width, width+1, width*2+1, width*2+2]
 ]
 
-const tTetromino = [
+const teewee = [  //T shape
     [1, width, width+1, width+2],
     [1, width+1, width+2, width*2+1],
     [width, width+1, width+2, width*2+1],
     [1, width, width+1, width*2+1]
 ]
 
-const oTetromino = [
+const smashboy = [  //Square
     [0, 1, width, width+1],
     [0, 1, width, width+1],
     [0, 1, width, width+1],
     [0, 1, width, width+1]
 ]
 
-const iTetromino = [
+const hero = [  //Straight line
     [1, width+1, width*2+1, width*3+1],
     [width, width+1, width+2, width+3],
     [1, width+1, width*2+1, width*3+1],
     [width, width+1, width+2, width+3]
 ]
 
-const theTetrominoes = [rTetromino, lTetromino, zTetromino, sTetromino, tTetromino, oTetromino, iTetromino]
+const theTetrominoes = [blueRicky, orangeRicky, clevelandZ, rhodeIslandZ, teewee, smashboy, hero]
 
 let currentPosition = 4
 let currentRotation = 0
@@ -201,14 +201,14 @@ const displayIndex = 0
 
 
 // the Tetrominoes without roations
-const upNextTetrominoes = [
-    [1, 2, displayWidth+1, displayWidth*2+1],  //rTetromino
-    [0, displayWidth, displayWidth*2, displayWidth*2+1], //lTetromino
-    [displayWidth+1, displayWidth+2, displayWidth*2, displayWidth*2+1], //sTetromino
-    [displayWidth, displayWidth+1, displayWidth*2+1, displayWidth*2+2], //zTetromino
-    [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
-    [0, 1, displayWidth, displayWidth+1], //oTetromino
-    [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
+const upNexteeweees = [
+    [1, 2, displayWidth+1, displayWidth*2+1],  //blueRicky
+    [0, displayWidth, displayWidth*2, displayWidth*2+1], //orangeRicky
+    [displayWidth+1, displayWidth+2, displayWidth*2, displayWidth*2+1], //rhodeIslandZ
+    [displayWidth, displayWidth+1, displayWidth*2+1, displayWidth*2+2], //clevelandZ
+    [1, displayWidth, displayWidth+1, displayWidth+2], //teewee
+    [0, 1, displayWidth, displayWidth+1], //smashboy
+    [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //hero
 ]
 
   //display the shape in the mini-grid display
@@ -218,7 +218,7 @@ const upNextTetrominoes = [
       square.classList.remove('tetromino')
       square.style.backgroundColor = ''
     })
-    upNextTetrominoes[nextRandom].forEach( index => {
+    upNexteeweees[nextRandom].forEach( index => {
       displaySquares[displayIndex + index].classList.add('tetromino')
       displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom]
     })
